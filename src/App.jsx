@@ -1,8 +1,10 @@
+import Personal from "./pages/Personal";
+
 function App() {
   return (
-    <>
-      <h1>Initial Setup!</h1>
-    </>
+    <div className="bg-[#EFF5FF] h-screen flex  justify-center items-center">
+      <Personal />
+    </div>
   );
 }
 
