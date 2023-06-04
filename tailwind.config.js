@@ -9,6 +9,9 @@ export default {
       backgroundImage: {
         "mb-pattern": "url('/src/assets/bg-sidebar-mobile.svg')",
       },
+      backgroundColor: {
+        custom: "#022959",
+      },
     },
   },
   plugins: [],

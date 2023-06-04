@@ -65,7 +65,7 @@ const Personal = () => {
         </form>
       </div>
 
-      <div className="w-full p-4 flex justify-end bg-white mt-auto">
+      <div className="w-full p-4 flex justify-end bg-white mt-auto shadow-md">
         <button
           className="h-10 w-24 bg-[#022959] font-medium text-sm font-ubuntu text-white rounded-[4px] "
           onClick={() => {
