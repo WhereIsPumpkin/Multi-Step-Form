@@ -9,7 +9,7 @@ const MenuBar = () => {
         <div
           className={`rounded-full h-8 w-8 flex items-center justify-center border border-white ${
             location.pathname === "/personal"
-              ? "bg-[#BEE2FD] border-[#BEE2FD]"
+              ? "bg-[#BEE2FD] !border-[#BEE2FD]"
               : "bg-transparent"
           }`}
         >
@@ -27,7 +27,7 @@ const MenuBar = () => {
         <div
           className={`rounded-full h-8 w-8 flex items-center justify-center border border-white ${
             location.pathname === "/plan"
-              ? "bg-[#BEE2FD] border-[#BEE2FD]"
+              ? "bg-[#BEE2FD] !border-[#BEE2FD]"
               : "bg-transparent"
           }`}
         >
@@ -42,14 +42,14 @@ const MenuBar = () => {
 
         <div
           className={`rounded-full h-8 w-8 flex items-center justify-center border border-white ${
-            location.pathname === "/addon"
-              ? "bg-[#BEE2FD] border-[#BEE2FD]"
+            location.pathname === "/addons"
+              ? "bg-[#BEE2FD] !border-[#BEE2FD]"
               : "bg-transparent"
           }`}
         >
           <span
             className={`font-ubuntu text-sm font-bold ${
-              location.pathname === "/finish" ? "text-[#022959]" : "text-white"
+              location.pathname === "/addons" ? "text-[#022959]" : "text-white"
             }`}
           >
             3
@@ -59,7 +59,7 @@ const MenuBar = () => {
         <div
           className={`rounded-full h-8 w-8 flex items-center justify-center border border-white ${
             location.pathname === "/finish"
-              ? "bg-[#BEE2FD] border-[#BEE2FD]"
+              ? "bg-[#BEE2FD] !border-[#BEE2FD]"
               : "bg-transparent"
           }`}
         >

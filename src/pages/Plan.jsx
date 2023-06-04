@@ -90,7 +90,7 @@ const Plan = () => {
         <button
           className="h-10 w-24 bg-[#022959] font-medium text-sm font-ubuntu text-white rounded-[4px]"
           onClick={() => {
-            navigate("/plan");
+            navigate("/addons");
           }}
         >
           Next Step
