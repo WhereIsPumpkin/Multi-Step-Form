@@ -1,10 +1,13 @@
 import MenuBar from "../components/MenuBar";
+import { useNavigate } from "react-router-dom";
 
 const Personal = () => {
+  const navigate = useNavigate();
+
   return (
-    <>
+    <div className="flex flex-col items-center  h-screen">
       <MenuBar />
-      <div className="py-8 px-6 flex flex-col max-w-[343px] bg-white rounded-[10px] gap-[22px] shadow-xl">
+      <div className="py-8 px-6 flex flex-col max-w-[343px] bg-white rounded-[10px] gap-[22px] shadow-xl -mt-16">
         <div>
           <h1 className="text-[#022959] text-2xl font-ubuntu font-bold mb-2">
             Personal Info
@@ -26,7 +29,7 @@ const Personal = () => {
               id="name"
               name="name"
               placeholder="e.g. Stephen King"
-              className="border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1"
+              className="border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1 outline-[#483EFF] outline-1 font-ubuntu font-medium text-base text-[#022959]"
             />
           </div>
           <div className="flex flex-col">
@@ -41,7 +44,7 @@ const Personal = () => {
               id="email"
               name="email"
               placeholder="e.g. stephenking@lorem.com"
-              className="border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1"
+              className=" outline-[#483EFF] outline-1 border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1 font-ubuntu font-medium text-base text-[#022959]"
             />
           </div>
           <div className="flex flex-col">
@@ -56,12 +59,23 @@ const Personal = () => {
               id="phone"
               name="phone"
               placeholder="e.g. +1 234 567 890"
-              className="border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1"
+              className=" outline-[#483EFF] outline-1 border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1 font-ubuntu font-medium text-base text-[#022959]"
             />
           </div>
         </form>
       </div>
-    </>
+
+      <div className="w-full p-4 flex justify-end bg-white mt-auto">
+        <button
+          className="h-10 w-24 bg-[#022959] font-medium text-sm font-ubuntu text-white rounded-[4px] "
+          onClick={() => {
+            navigate("/plan");
+          }}
+        >
+          Next Step
+        </button>
+      </div>
+    </div>
   );
 };
 

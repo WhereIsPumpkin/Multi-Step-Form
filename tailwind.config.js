@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         ubuntu: ["Ubuntu", "sans-serif"],
       },
+      backgroundImage: {
+        "mb-pattern": "url('/src/assets/bg-sidebar-mobile.svg')",
+      },
     },
   },
   plugins: [],
