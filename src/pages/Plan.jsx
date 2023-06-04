@@ -10,6 +10,11 @@ import { Link } from "react-router-dom";
 const Plan = () => {
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
+  const [activePlan, setActivePlan] = useState("Arcade");
+
+  const handlePlanClick = (plan) => {
+    setActivePlan(plan);
+  };
 
   return (
     <main className="flex flex-col items-center  h-screen">
@@ -26,9 +31,27 @@ const Plan = () => {
         </header>
 
         <ul className="flex flex-col gap-3">
-          {renderPlanOption(arcadeIcon, "Arcade", "$9/mo")}
-          {renderPlanOption(advancedIcon, "Advanced", "$12/mo")}
-          {renderPlanOption(proIcon, "Pro", "$15/mo")}
+          {renderPlanOption({
+            icon: arcadeIcon,
+            title: "Arcade",
+            price: "$9/mo",
+            isActive: activePlan,
+            handleClick: handlePlanClick,
+          })}
+          {renderPlanOption({
+            icon: advancedIcon,
+            title: "Advanced",
+            price: "$12/mo",
+            isActive: activePlan,
+            handleClick: handlePlanClick,
+          })}
+          {renderPlanOption({
+            icon: proIcon,
+            title: "Pro",
+            price: "$15/mo",
+            isActive: activePlan,
+            handleClick: handlePlanClick,
+          })}
         </ul>
 
         <div className="flex items-center justify-center bg-[#F8F9FF] rounded-lg py-[14px]">
