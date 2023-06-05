@@ -58,14 +58,17 @@ const MenuBar = () => {
 
         <div
           className={`rounded-full h-8 w-8 flex items-center justify-center border border-white ${
-            location.pathname === "/finish"
+            location.pathname === "/finish" || location.pathname === "/thankyou"
               ? "bg-[#BEE2FD] !border-[#BEE2FD]"
               : "bg-transparent"
           }`}
         >
           <span
             className={`font-ubuntu text-sm font-bold ${
-              location.pathname === "/finish" ? "text-[#022959]" : "text-white"
+              location.pathname === "/finish" ||
+              location.pathname === "/thankyou"
+                ? "text-[#022959]"
+                : "text-white"
             }`}
           >
             4

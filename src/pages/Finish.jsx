@@ -67,7 +67,7 @@ const Finish = () => {
 
       <footer className="w-full p-4 flex justify-between bg-white mt-auto shadow-md items-center">
         <Link
-          to={"/plan"}
+          to={"/addons"}
           className="font-ubuntu font-medium text-sm text-[#9699AA]"
         >
           Go Back
@@ -75,7 +75,7 @@ const Finish = () => {
         <button
           className="h-10 w-24 bg-[#022959] font-medium text-sm font-ubuntu text-white rounded-[4px]"
           onClick={() => {
-            // navigate("$");
+            navigate("/thankyou");
           }}
         >
           Next Step
