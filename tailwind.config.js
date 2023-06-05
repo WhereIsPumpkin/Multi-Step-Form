@@ -11,6 +11,7 @@ export default {
       },
       backgroundColor: {
         custom: "#022959",
+        lightg: "#D6D9E6",
       },
     },
   },

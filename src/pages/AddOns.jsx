@@ -1,5 +1,6 @@
 import MenuBar from "../components/MenuBar";
 import { Link, useNavigate } from "react-router-dom";
+import Services from "../components/Services";
 
 const AddOns = () => {
   const navigate = useNavigate();
@@ -16,6 +17,24 @@ const AddOns = () => {
             You have the option of monthly or yearly billing.
           </p>
         </header>
+
+        <ul className="flex flex-col gap-3">
+          {Services({
+            title: "Online service",
+            service: "Access to multiplayer games",
+            price: "+$1/mo",
+          })}
+          {Services({
+            title: "Larger Storage",
+            service: "Extra 1TB of cloud save",
+            price: "+$2/mo",
+          })}
+          {Services({
+            title: "Customizable profile",
+            service: "Custom theme on your profile",
+            price: "+$2/mo",
+          })}
+        </ul>
       </section>
 
       <footer className="w-full p-4 flex justify-between bg-white mt-auto shadow-md items-center">
@@ -28,7 +47,7 @@ const AddOns = () => {
         <button
           className="h-10 w-24 bg-[#022959] font-medium text-sm font-ubuntu text-white rounded-[4px]"
           onClick={() => {
-            // navigate("$");
+            navigate("/finish");
           }}
         >
           Next Step
