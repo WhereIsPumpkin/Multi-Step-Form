@@ -1,6 +1,5 @@
 import MenuBar from "../components/MenuBar";
 import thankYouIcon from "../assets/icon-thank-you.svg";
-import { useNavigate } from "react-router-dom";
 
 const Thank = () => {
   return (

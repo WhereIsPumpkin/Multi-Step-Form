@@ -1,8 +1,45 @@
+import { useDispatch, useSelector } from "react-redux";
+import { updateData } from "../features/formSlice";
+import { useForm } from "react-hook-form";
 import MenuBar from "../components/MenuBar";
 import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const Personal = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
+  const formSlice = useSelector((state) => state.form);
+
+  const onSubmit = (data) => {
+    navigate("/plan");
+    dispatch(updateData({ property: "name", value: data.name }));
+    dispatch(updateData({ property: "email", value: data.email }));
+    dispatch(updateData({ property: "phone", value: data.phone }));
+  };
+
+  const schema = yup.object({
+    name: yup.string().required("Name is required"),
+    email: yup
+      .string()
+      .email("Email format is not valid")
+      .required("Email is required"),
+    phone: yup.number().required("Number is required"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+    },
+    resolver: yupResolver(schema),
+  });
 
   return (
     <div className="flex flex-col items-center  h-screen">
@@ -16,7 +53,8 @@ const Personal = () => {
             Please provide your name, email address, and phone number.
           </p>
         </div>
-        <form className="flex flex-col gap-4">
+
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col">
             <label
               htmlFor="name"
@@ -30,8 +68,10 @@ const Personal = () => {
               name="name"
               placeholder="e.g. Stephen King"
               className="border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1 outline-[#483EFF] outline-1 font-ubuntu font-medium text-base text-[#022959]"
+              {...register("name")}
             />
           </div>
+
           <div className="flex flex-col">
             <label
               htmlFor="email"
@@ -45,8 +85,10 @@ const Personal = () => {
               name="email"
               placeholder="e.g. stephenking@lorem.com"
               className=" outline-[#483EFF] outline-1 border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1 font-ubuntu font-medium text-base text-[#022959]"
+              {...register("email")}
             />
           </div>
+
           <div className="flex flex-col">
             <label
               htmlFor="phone"
@@ -55,21 +97,38 @@ const Personal = () => {
               Phone
             </label>
             <input
-              type="tel"
+              type="number"
               id="phone"
               name="phone"
               placeholder="e.g. +1 234 567 890"
               className=" outline-[#483EFF] outline-1 border border-[#D6D9E6] rounded py-3 px-4 max-h-10 mt-1 font-ubuntu font-medium text-base text-[#022959]"
+              {...register("phone")}
             />
           </div>
+
+          {Object.keys(errors).length > 0 &&
+            (!errors.email || errors.email.type !== "email") && (
+              <p className="text-red-500 text-xs italic mt-2">
+                All fields are required.
+              </p>
+            )}
+          {!errors.name &&
+            !errors.phone &&
+            errors.email &&
+            errors.email.type === "email" && (
+              <p className="text-red-500 text-xs italic mt-2">
+                {errors.email.message}
+              </p>
+            )}
         </form>
       </div>
 
       <div className="w-full p-4 flex justify-end bg-white mt-auto shadow-md">
         <button
+          type="submit"
           className="h-10 w-24 bg-[#022959] font-medium text-sm font-ubuntu text-white rounded-[4px] "
           onClick={() => {
-            navigate("/plan");
+            handleSubmit(onSubmit)();
           }}
         >
           Next Step
