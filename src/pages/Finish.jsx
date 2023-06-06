@@ -1,7 +1,10 @@
 import MenuBar from "../components/MenuBar";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Finish = () => {
+  const formSlice = useSelector((state) => state.form);
+
   const navigate = useNavigate();
   return (
     <main className="flex flex-col items-center  h-screen">
@@ -21,7 +24,7 @@ const Finish = () => {
           <div className="flex justify-between items-center pb-3 border-b">
             <div className="flex flex-col">
               <h1 className="font-ubuntu text-sm font-medium text-[#022959]">
-                Arcade (Monthly)
+                {`${formSlice.plan} (${formSlice.subscriptionType})`}
               </h1>
               <Link
                 to="/plan"
@@ -31,27 +34,49 @@ const Finish = () => {
               </Link>
             </div>
             <span className="font-ubuntu text-sm text-[#022959] font-bold">
-              $9/mo
+              {formSlice.plan === "Arcade" &&
+              formSlice.subscriptionType === "Yearly"
+                ? "$90/yr"
+                : formSlice.plan === "Arcade" &&
+                  formSlice.subscriptionType === "Monthly"
+                ? "$9/mo"
+                : formSlice.plan === "Advanced" &&
+                  formSlice.subscriptionType === "Yearly"
+                ? "120/yr"
+                : formSlice.plan === "Advanced" &&
+                  formSlice.subscriptionType === "Monthly"
+                ? "$12/mo"
+                : formSlice.plan === "Pro" &&
+                  formSlice.subscriptionType === "Monthly"
+                ? "$15/mo"
+                : formSlice.plan === "Pro" &&
+                  formSlice.subscriptionType === "Yearly"
+                ? "$150/yr"
+                : null}
             </span>
           </div>
 
           <ul className="flex flex-col gap-3">
-            <li className="flex justify-between items-center">
-              <h1 className="text-[#9699AA] text-sm font-normal font-ubuntu">
-                Online Service
-              </h1>
-              <span className="font-ubuntu text-sm text-[#022959] font-normal">
-                +$1/mo
-              </span>
-            </li>
-            <li className="flex justify-between items-center">
-              <h1 className="text-[#9699AA] text-sm font-normal font-ubuntu">
-                Online Service
-              </h1>
-              <span className="font-ubuntu text-sm text-[#022959] font-normal">
-                +$1/mo
-              </span>
-            </li>
+            {Object.entries(formSlice.addOns).map(([key, value]) => {
+              if (value) {
+                return (
+                  <li key={key} className="flex justify-between items-center">
+                    <h1 className="text-[#9699AA] text-sm font-normal font-ubuntu">
+                      {key === "onlineService"
+                        ? "Online service"
+                        : key === "largeStorage"
+                        ? "Larger storage"
+                        : key === "customizableProfile"
+                        ? "Customizable profile"
+                        : null}
+                    </h1>
+                    <span className="font-ubuntu text-sm text-[#022959] font-normal">
+                      {key === "onlineService" ? "+$1/mo" : "+$2/mo"}
+                    </span>
+                  </li>
+                );
+              }
+            })}
           </ul>
         </div>
 
