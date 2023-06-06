@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 
-const RenderPlanOption = ({ icon, title, price, isActive, handleClick }) => {
+const RenderPlanOption = ({
+  icon,
+  title,
+  price,
+  isActive,
+  handleClick,
+  isChecked,
+}) => {
   return (
     <li
       onClick={() => handleClick(title)}
@@ -16,6 +23,11 @@ const RenderPlanOption = ({ icon, title, price, isActive, handleClick }) => {
         <span className="font-ubuntu text-[#9699AA] text-sm font-normal">
           {price}
         </span>
+        {isChecked && (
+          <span className="font-ubuntu text-xs text-[#022959] font-normal">
+            2 month free
+          </span>
+        )}
       </div>
     </li>
   );
@@ -27,6 +39,7 @@ RenderPlanOption.propTypes = {
   price: PropTypes.string.isRequired,
   isActive: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
+  isChecked: PropTypes.bool.isRequired,
 };
 
 export default RenderPlanOption;

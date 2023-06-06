@@ -4,10 +4,13 @@ import advancedIcon from "../assets/icon-advanced.svg";
 import proIcon from "../assets/icon-pro.svg";
 import { useNavigate } from "react-router-dom";
 import renderPlanOption from "../components/PlanOption";
+import { useDispatch } from "react-redux";
+import { updateData } from "../features/formSlice";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Plan = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
   const [activePlan, setActivePlan] = useState("Arcade");
@@ -34,22 +37,25 @@ const Plan = () => {
           {renderPlanOption({
             icon: arcadeIcon,
             title: "Arcade",
-            price: "$9/mo",
+            price: isChecked ? "$90/yr" : "$9/mo",
             isActive: activePlan,
+            isChecked,
             handleClick: handlePlanClick,
           })}
           {renderPlanOption({
             icon: advancedIcon,
             title: "Advanced",
-            price: "$12/mo",
+            price: isChecked ? "$120/yr" : "$12/mo",
             isActive: activePlan,
+            isChecked,
             handleClick: handlePlanClick,
           })}
           {renderPlanOption({
             icon: proIcon,
             title: "Pro",
-            price: "$15/mo",
+            price: isChecked ? "$150/yr" : "$15/mo",
             isActive: activePlan,
+            isChecked,
             handleClick: handlePlanClick,
           })}
         </ul>
@@ -90,6 +96,18 @@ const Plan = () => {
         <button
           className="h-10 w-24 bg-[#022959] font-medium text-sm font-ubuntu text-white rounded-[4px]"
           onClick={() => {
+            dispatch(
+              updateData({
+                property: "plan",
+                value: activePlan,
+              })
+            );
+            dispatch(
+              updateData({
+                property: "subscriptionType",
+                value: isChecked ? "Yearly" : "Monthly",
+              })
+            );
             navigate("/addons");
           }}
         >

@@ -2,13 +2,20 @@ import checkIcon from "../assets/icon-checkmark.svg";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const Services = ({ title, service, price }) => {
+const Services = ({ title, service, price, onChange }) => {
   const [isChecked, setIsChecked] = useState(false);
+  const handleClick = () => {
+    setIsChecked(!isChecked);
+    if (onChange) {
+      onChange(!isChecked);
+    }
+  };
   return (
     <li
       className={`py-3 px-4 flex justify-between rounded-lg border border-[#D6D9E6] items-center ${
         isChecked ? "!border-[#483EFF] bg-![#F8F9FF]" : null
       }`}
+      onClick={handleClick}
     >
       <div className="flex gap-4 items-center">
         <div
@@ -17,7 +24,6 @@ const Services = ({ title, service, price }) => {
               ? "bg-[#483EFF]"
               : "bg-transparent border border-[#D6D9E6]"
           }`}
-          onClick={() => setIsChecked(!isChecked)}
         >
           {isChecked ? <img src={checkIcon} alt="check icon" /> : null}
         </div>
@@ -42,6 +48,7 @@ Services.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   service: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
 };
 
 export default Services;

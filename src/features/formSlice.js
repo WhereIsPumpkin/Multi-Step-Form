@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import set from "lodash/set";
 
 const initialState = {
   name: "",
   email: "",
   phone: "",
-  plan: "",
+  plan: "Arcade",
   subscriptionType: "Monthly",
   addOns: {
     onlineService: false,
@@ -18,8 +19,7 @@ const formSlice = createSlice({
   initialState,
   reducers: {
     updateData: (state, action) => {
-      console.log(action);
-      state[action.payload.property] = action.payload.value;
+      set(state, action.payload.property, action.payload.value);
     },
   },
 });

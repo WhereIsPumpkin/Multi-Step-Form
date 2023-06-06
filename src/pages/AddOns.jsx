@@ -1,10 +1,15 @@
 import MenuBar from "../components/MenuBar";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { updateData } from "../features/formSlice";
 import Services from "../components/Services";
 
 const AddOns = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const handleAddOnsChange = (addOnName, isChecked) => {
+    dispatch(updateData({ property: `addOns.${addOnName}`, value: isChecked }));
+  };
   return (
     <main className="flex flex-col items-center  h-screen">
       <MenuBar />
@@ -24,16 +29,22 @@ const AddOns = () => {
             title: "Online service",
             service: "Access to multiplayer games",
             price: "+$1/mo",
+            onChange: (isChecked) =>
+              handleAddOnsChange("onlineService", isChecked),
           })}
           {Services({
             title: "Larger Storage",
             service: "Extra 1TB of cloud save",
             price: "+$2/mo",
+            onChange: (isChecked) =>
+              handleAddOnsChange("largeStorage", isChecked),
           })}
           {Services({
             title: "Customizable profile",
             service: "Custom theme on your profile",
             price: "+$2/mo",
+            onChange: (isChecked) =>
+              handleAddOnsChange("customizableProfile", isChecked),
           })}
         </ul>
       </section>

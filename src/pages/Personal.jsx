@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateData } from "../features/formSlice";
 import { useForm } from "react-hook-form";
 import MenuBar from "../components/MenuBar";
@@ -10,14 +10,16 @@ const Personal = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const formSlice = useSelector((state) => state.form);
 
   const onSubmit = (data) => {
-    navigate("/plan");
+    localStorage.setItem("personalData", JSON.stringify(data));
     dispatch(updateData({ property: "name", value: data.name }));
     dispatch(updateData({ property: "email", value: data.email }));
     dispatch(updateData({ property: "phone", value: data.phone }));
+    navigate("/plan");
   };
+
+  const savedData = JSON.parse(localStorage.getItem("personalData"));
 
   const schema = yup.object({
     name: yup.string().required("Name is required"),
@@ -34,9 +36,9 @@ const Personal = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
+      name: savedData.name || "",
+      email: savedData.email || "",
+      phone: savedData.phone || "",
     },
     resolver: yupResolver(schema),
   });
