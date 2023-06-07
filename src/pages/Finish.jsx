@@ -52,7 +52,7 @@ const Finish = () => {
                 : formSlice.plan === "Pro" &&
                   formSlice.subscriptionType === "Yearly"
                 ? "$150/yr"
-                : null}
+                : ""}
             </span>
           </div>
 
@@ -68,7 +68,7 @@ const Finish = () => {
                         ? "Larger storage"
                         : key === "customizableProfile"
                         ? "Customizable profile"
-                        : null}
+                        : ""}
                     </h1>
                     <span className="font-ubuntu text-sm text-[#022959] font-normal">
                       {key === "onlineService" ? "+$1/mo" : "+$2/mo"}

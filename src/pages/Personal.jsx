@@ -36,9 +36,9 @@ const Personal = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: savedData.name || "",
-      email: savedData.email || "",
-      phone: savedData.phone || "",
+      name: savedData?.name || "",
+      email: savedData?.email || "",
+      phone: savedData?.phone || "",
     },
     resolver: yupResolver(schema),
   });
