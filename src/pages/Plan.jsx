@@ -4,7 +4,7 @@ import advancedIcon from "../assets/icon-advanced.svg";
 import proIcon from "../assets/icon-pro.svg";
 import { useNavigate } from "react-router-dom";
 import renderPlanOption from "../components/PlanOption";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateData } from "../features/formSlice";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -12,12 +12,23 @@ import { Link } from "react-router-dom";
 const Plan = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const formSlice = useSelector((state) => state.form);
   const [isChecked, setIsChecked] = useState(false);
-  const [activePlan, setActivePlan] = useState("Arcade");
+
+  const [activePlan, setActivePlan] = useState(
+    `${
+      formSlice.plan === "Arcade"
+        ? "Arcade"
+        : formSlice.plan === "Pro"
+        ? "Pro"
+        : "Advanced"
+    }`
+  );
 
   const handlePlanClick = (plan) => {
     setActivePlan(plan);
   };
+  console.log(formSlice.subscriptionType);
 
   return (
     <main className="flex flex-col items-center  h-screen">

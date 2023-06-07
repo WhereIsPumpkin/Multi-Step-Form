@@ -1,12 +1,13 @@
 import MenuBar from "../components/MenuBar";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateData } from "../features/formSlice";
 import Services from "../components/Services";
 
 const AddOns = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const formSlice = useSelector((state) => state.form);
   const handleAddOnsChange = (addOnName, isChecked) => {
     dispatch(updateData({ property: `addOns.${addOnName}`, value: isChecked }));
   };
@@ -28,23 +29,29 @@ const AddOns = () => {
           {Services({
             title: "Online service",
             service: "Access to multiplayer games",
-            price: "+$1/mo",
+            price:
+              formSlice.subscriptionType === "Monthly" ? "+$1/mo" : "+$10/yr",
             onChange: (isChecked) =>
               handleAddOnsChange("onlineService", isChecked),
+            isChecked: formSlice.addOns.onlineService,
           })}
           {Services({
             title: "Larger Storage",
             service: "Extra 1TB of cloud save",
-            price: "+$2/mo",
+            price:
+              formSlice.subscriptionType === "Monthly" ? "+$2/mo" : "+$20/yr",
             onChange: (isChecked) =>
               handleAddOnsChange("largeStorage", isChecked),
+            isChecked: formSlice.addOns.largeStorage,
           })}
           {Services({
             title: "Customizable profile",
             service: "Custom theme on your profile",
-            price: "+$2/mo",
+            price:
+              formSlice.subscriptionType === "Monthly" ? "+$2/mo" : "+$20/yr",
             onChange: (isChecked) =>
               handleAddOnsChange("customizableProfile", isChecked),
+            isChecked: formSlice.addOns.customizableProfile,
           })}
         </ul>
       </section>

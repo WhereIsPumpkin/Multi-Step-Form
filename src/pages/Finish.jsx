@@ -6,6 +6,70 @@ const Finish = () => {
   const formSlice = useSelector((state) => state.form);
 
   const navigate = useNavigate();
+  const calculateTotal = () => {
+    let total = 0;
+    if (
+      formSlice.plan === "Arcade" &&
+      formSlice.subscriptionType === "Yearly"
+    ) {
+      total += 90;
+    } else if (
+      formSlice.plan === "Arcade" &&
+      formSlice.subscriptionType === "Monthly"
+    ) {
+      total += 9;
+    } else if (
+      formSlice.plan === "Advanced" &&
+      formSlice.subscriptionType === "Yearly"
+    ) {
+      total += 120;
+    } else if (
+      formSlice.plan === "Advanced" &&
+      formSlice.subscriptionType === "Monthly"
+    ) {
+      total += 12;
+    } else if (
+      formSlice.plan === "Pro" &&
+      formSlice.subscriptionType === "Monthly"
+    ) {
+      total += 15;
+    } else if (
+      formSlice.plan === "Pro" &&
+      formSlice.subscriptionType === "Yearly"
+    ) {
+      total += 150;
+    }
+
+    if (formSlice.addOns.onlineService) {
+      total +=
+        formSlice.subscriptionType === "Monthly"
+          ? 1
+          : formSlice.subscriptionType === "Yearly"
+          ? 10
+          : 0;
+    }
+
+    if (formSlice.addOns.largeStorage) {
+      total +=
+        formSlice.subscriptionType === "Monthly"
+          ? 2
+          : formSlice.subscriptionType === "Yearly"
+          ? 20
+          : 0;
+    }
+
+    if (formSlice.addOns.customizableProfile) {
+      total +=
+        formSlice.subscriptionType === "Monthly"
+          ? 2
+          : formSlice.subscriptionType === "Yearly"
+          ? 20
+          : 0;
+    }
+
+    return total;
+  };
+  const total = calculateTotal();
   return (
     <main className="flex flex-col items-center  h-screen">
       <MenuBar />
@@ -71,7 +135,23 @@ const Finish = () => {
                         : ""}
                     </h1>
                     <span className="font-ubuntu text-sm text-[#022959] font-normal">
-                      {key === "onlineService" ? "+$1/mo" : "+$2/mo"}
+                      {key === "onlineService" &&
+                      formSlice.subscriptionType === "Monthly"
+                        ? "+$1/mo"
+                        : key === "onlineService" &&
+                          formSlice.subscriptionType === "Yearly"
+                        ? "+$10/yr"
+                        : key === "largeStorage" &&
+                          formSlice.subscriptionType === "Monthly"
+                        ? "+$2/mo"
+                        : key === "largeStorage" ||
+                          (key === "customizableProfile" &&
+                            formSlice.subscriptionType === "Yearly")
+                        ? "+$20/yr"
+                        : key === "customizableProfile" &&
+                          formSlice.subscriptionType === "Monthly"
+                        ? "+$2/mo"
+                        : ""}
                     </span>
                   </li>
                 );
@@ -85,7 +165,9 @@ const Finish = () => {
             Total (per month)
           </h1>
           <span className="font-ubuntu text-base font-bold text-[#483EFF]">
-            +$12/mo
+            {formSlice.subscriptionType === "Monthly"
+              ? `+$${total}/mo`
+              : `+$${total}/yr`}
           </span>
         </div>
       </section>

@@ -2,8 +2,14 @@ import checkIcon from "../assets/icon-checkmark.svg";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const Services = ({ title, service, price, onChange }) => {
-  const [isChecked, setIsChecked] = useState(false);
+const Services = ({
+  title,
+  service,
+  price,
+  onChange,
+  isChecked: initialIsChecked,
+}) => {
+  const [isChecked, setIsChecked] = useState(initialIsChecked);
   const handleClick = () => {
     setIsChecked(!isChecked);
     if (onChange) {
@@ -49,6 +55,7 @@ Services.propTypes = {
   price: PropTypes.string.isRequired,
   service: PropTypes.string.isRequired,
   onChange: PropTypes.func,
+  isChecked: PropTypes.bool,
 };
 
 export default Services;
