@@ -3,10 +3,11 @@ import { updateData } from "../features/formSlice";
 import { useForm } from "react-hook-form";
 import MenuBar from "../components/MenuBar";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const Personal = () => {
+const Personal = ({ setIsCompleted }) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Personal = () => {
     dispatch(updateData({ property: "name", value: data.name }));
     dispatch(updateData({ property: "email", value: data.email }));
     dispatch(updateData({ property: "phone", value: data.phone }));
+    setIsCompleted(true);
     navigate("/plan");
   };
 
@@ -138,6 +140,9 @@ const Personal = () => {
       </div>
     </div>
   );
+};
+Personal.propTypes = {
+  setIsCompleted: PropTypes.func.isRequired,
 };
 
 export default Personal;
